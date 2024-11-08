@@ -1,0 +1,156 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package mysqlconnect;
+import java.sql.*;
+/**
+ *
+ * @author ashle
+ */
+public class MySQLcreate {
+    public static void main(String[] args)
+    {
+        String DB_URL = "jdbc:mysql://localhost:3306/Mydatabase1";
+        String DB_USER = "root";
+        String DB_PWD = "root@123";
+        try(Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PWD))
+        {
+            System.out.println("Database connected successfully");
+            Statement statement = connection.createStatement();
+            statement.execute("CREATE TABLE student(roll_number int, name varchar(20), division varchar(20))");
+            System.out.println("Query executed successfully");
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+}
+
+
+
+
+
+
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package mysqlconnect;
+
+import java.sql.*;
+
+/**
+ *
+ * @author ashle
+ */
+public class MySQLinsert {
+    public static void main(String[] args) {
+        String DB_URL = "jdbc:mysql://localhost:3306/Mydatabase1";
+        String DB_USER = "root";
+        String DB_PWD = "root@123";
+
+        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PWD)) {
+            System.out.println("Database Connected successfully");
+
+            // Execute the insert query
+           // executeQuery(connection, "INSERT INTO student VALUES (62, 'Ayan_Mujeeb_Khan', 'TY-INT-BTech')");
+           String query = "INSERT INTO student VALUES (57, 'Anuja Walke', 'TY-AIDS')";
+           Statement statement = connection.createStatement();
+            statement.executeUpdate(query);
+            System.out.println("Query executed successfully");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
+//    private static void executeQuery(Connection connection, String query) throws SQLException {
+//        try (Statement statement = connection.createStatement()) {
+//            statement.executeUpdate(query);
+//            System.out.println("Query executed successfully");
+//        }
+//    }
+//}
+
+
+
+
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package mysqlconnect;
+import java.sql.*;
+/**
+ *
+ * @author ashle
+ */
+public class MySQLdelete {
+    public static void main(String[] args)
+    {
+        String DB_URL = "jdbc:mysql://localhost:3306/Mydatabase1";
+        String DB_USER = "root";
+        String DB_PWD = "root@123";
+        try(Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PWD))
+        {
+            System.out.println("Database connected successfully");
+            Statement statement = connection.createStatement();
+            statement.executeUpdate("DELETE FROM student WHERE name = 'Mihika Joshi'");
+            System.out.println("Query executed successfully");
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+}
+
+
+
+
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package mysqlconnect;
+import java.sql.*;
+/**
+ *
+ * @author ashle
+ */
+public class MySQLdisplay {
+    public static void main(String[] args)
+    {
+        String DB_URL = "jdbc:mysql://localhost:3306/Mydatabase1";
+        String DB_USER = "root";
+        String DB_PWD = "root@123";
+        try(Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PWD))
+        {
+            System.out.println("Database connected successfully");
+            Statement statement = connection.createStatement();
+            
+            ResultSet rset = statement.executeQuery("SELECT * FROM student");
+            
+            System.out.println("Student Information:");
+            
+            while (rset.next())
+            {
+                int roll_num = rset.getInt("Roll_number");
+                String name = rset.getString("Name");
+                String division = rset.getString("Division");
+                
+                System.out.println("Roll Num:" + roll_num + ", Name: " + name + ", Division: " + division);
+            }
+            
+            System.out.println("Query executed successfully");
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+}
